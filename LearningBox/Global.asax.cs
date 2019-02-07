@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using AutoMapper;
+using LearningBox.Models.DatabaseModels.DbInitializer;
 
 namespace LearningBox
 {
@@ -16,6 +15,15 @@ namespace LearningBox
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+
+            Mapper.Initialize(config =>
+            {
+                //config.CreateMap<ApplicationUser, UpdateViewModel>().ReverseMap();
+            });
+
+            Database.SetInitializer(new DbInitializer());
+            UnityConfig.RegisterComponents();
         }
     }
 }
