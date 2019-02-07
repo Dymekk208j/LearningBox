@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -17,6 +19,9 @@ namespace LearningBox.Models.DatabaseModels
 
         [Display(Name = "Blocked")]
         public bool Blocked { get; set; }
+
+        [Display(Name = "Learning categories")]
+        public List<LearningCategory> LearningCategories { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -32,8 +37,9 @@ namespace LearningBox.Models.DatabaseModels
             return new ApplicationDbContext();
         }
 
-       // public virtual DbSet<TeamType> TeamTypes { get; set; }
-
+        public virtual DbSet<Card> TeamTypes { get; set; }
+        public virtual DbSet<LearningBox> LearningBoxes { get; set; }
+        public virtual DbSet<LearningCategory> LearningCategories { get; set; }
 
         public new virtual int SaveChanges()
         {
